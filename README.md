@@ -31,8 +31,8 @@ cargo install echeo
 
 ### From Source
 ```bash
-git clone https://github.com/yourusername/echeo.git
-cd echeo
+git clone https://github.com/repairman29/echeo-core.git
+cd echeo-core
 cargo build --release
 ./target/release/echeo --version
 ```

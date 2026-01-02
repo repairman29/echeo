@@ -72,6 +72,18 @@ struct Args {
     #[arg(long)]
     generate_loadout: bool,
 
+    /// Upload capabilities to Echeo API
+    #[arg(long)]
+    upload: bool,
+
+    /// Echeo API URL (defaults to https://echeo.io/api)
+    #[arg(long, default_value = "https://echeo.io/api")]
+    api_url: String,
+
+    /// User ID for API upload (required with --upload)
+    #[arg(long)]
+    user_id: Option<String>,
+
     /// GitHub personal access token (for scanning GitHub repos)
     #[arg(long)]
     github_token: Option<String>,
@@ -728,6 +740,80 @@ async fn main() -> Result<()> {
             println!("{} Generated loadout.json at {}", "[LOADOUT]".bright_yellow(), loadout_path.display().to_string().cyan());
         } else {
             println!("{} Embeddings required for loadout. Run without --skip-embeddings", "[ERROR]".red());
+        }
+    }
+
+    // 10. UPLOAD TO API: Upload capabilities to Echeo platform
+    if args.upload {
+        if let Some(ref caps) = embedded_caps {
+            let user_id = args.user_id.as_ref().ok_or_else(|| {
+                anyhow::anyhow!("--user-id is required when using --upload. Get your user ID from https://echeo.io/dashboard")
+            })?;
+
+            println!("{}", "---------------------------------".dimmed());
+            println!("{} Uploading {} capabilities to Echeo API...", "[UPLOAD]".bright_cyan(), caps.len().to_string().cyan());
+
+            // Calculate stack dominance
+            let mut stack_counts: HashMap<String, usize> = HashMap::new();
+            for cap in caps.iter() {
+                *stack_counts.entry(cap.language.clone()).or_insert(0) += 1;
+            }
+            let total = caps.len() as f64;
+            let stack_dominance: HashMap<String, f64> = stack_counts
+                .into_iter()
+                .map(|(lang, count)| (lang, count as f64 / total))
+                .collect();
+
+            // Calculate ship velocity score (average of all match scores, or default)
+            let ship_velocity_score = 85.0; // Could calculate from matches if available
+
+            // Prepare capabilities for upload
+            let capabilities: Vec<serde_json::Value> = caps.iter().map(|cap| {
+                serde_json::json!({
+                    "name": cap.name,
+                    "language": cap.language,
+                    "kind": cap.kind,
+                    "code_snippet": "", // CLI doesn't store full snippets, just embeddings
+                    "embedding": cap.embedding,
+                    "summary": "", // Would need summarizer output
+                    "path": cap.path
+                })
+            }).collect();
+
+            let payload = serde_json::json!({
+                "user_id": user_id,
+                "capabilities": capabilities,
+                "loadout": {
+                    "ship_velocity_score": ship_velocity_score,
+                    "stack_dominance": stack_dominance
+                }
+            });
+
+            let client = reqwest::Client::builder()
+                .timeout(std::time::Duration::from_secs(60))
+                .build()?;
+
+            let upload_url = format!("{}/capabilities", args.api_url);
+            let response = client
+                .post(&upload_url)
+                .header("Content-Type", "application/json")
+                .json(&payload)
+                .send()
+                .await?;
+
+            if response.status().is_success() {
+                let result: serde_json::Value = response.json().await?;
+                println!("{}", "---------------------------------".dimmed());
+                println!("{} Successfully uploaded {} capabilities!", "[UPLOAD]".bright_green(), result.get("capabilities_count").and_then(|v| v.as_u64()).unwrap_or(0).to_string().bright_cyan());
+                println!("{} View your matches at: https://echeo.io/dashboard", "[UPLOAD]".bright_green());
+            } else {
+                let error_text = response.text().await?;
+                println!("{} Upload failed: {}", "[ERROR]".red(), error_text);
+                return Err(anyhow::anyhow!("Upload failed: {}", error_text));
+            }
+        } else {
+            println!("{} Embeddings required for upload. Run without --skip-embeddings", "[ERROR]".red());
+            return Err(anyhow::anyhow!("Embeddings required for upload"));
         }
     }
 
