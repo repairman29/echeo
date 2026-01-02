@@ -1,0 +1,47 @@
+{
+  "name": "echeo",
+  "version": "0.1.0",
+  "description": "Echeo - The Resonant Engine. Find where your code resonates with market needs.",
+  "bin": {
+    "echeo": "bin/echeo"
+  },
+  "scripts": {
+    "install": "node install.js",
+    "postinstall": "node postinstall.js"
+  },
+  "keywords": [
+    "bounty",
+    "code",
+    "matching",
+    "freelance",
+    "developer",
+    "capabilities",
+    "resonance",
+    "cli"
+  ],
+  "author": "Echeo Team",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/repairman29/echeo-core.git"
+  },
+  "homepage": "https://echeo.io",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "files": [
+    "bin/",
+    "install.js",
+    "postinstall.js",
+    "README.md"
+  ]
+}

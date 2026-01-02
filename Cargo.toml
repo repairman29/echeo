@@ -1,0 +1,56 @@
+[package]
+name = "echeo"
+version = "0.1.0"
+edition = "2021"
+authors = ["Echeo Team"]
+description = "Echeo - The Resonant Engine. Find where your code resonates with market needs."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/repairman29/echeo-core"
+homepage = "https://echeo.io"
+keywords = ["bounty", "code", "matching", "freelance", "developer", "capabilities", "resonance"]
+categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "echeo"
+path = "src/main.rs"
+
+[dependencies]
+# The CLI Interface
+clap = { version = "4.4", features = ["derive"] }
+
+# The Crawler (Respects .gitignore, fast as hell)
+ignore = "0.4"
+
+# The Parallel Engine (Multi-threading)
+rayon = "1.8"
+
+# The Vibe (Hacker Terminal colors)
+colored = "2.0"
+
+# Error Handling (Keep it clean)
+anyhow = "1.0"
+
+# The Shredder (AST Parsing)
+tree-sitter = "0.20"
+tree-sitter-typescript = "0.20"
+tree-sitter-rust = "0.20"
+tree-sitter-python = "0.20"
+tree-sitter-go = "0.19"
+
+# The Vectorizer (Ollama Integration)
+reqwest = { version = "0.11", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.35", features = ["full"] }
+futures = "0.3"
+
+# The Matchmaker (Vector Similarity & Matching)
+rusqlite = { version = "0.30", features = ["bundled"] }
+
+# GitHub Integration
+base64 = "0.21"
+
+# Bounty Scrapers
+chrono = "0.4"
+regex = "1.10"
+

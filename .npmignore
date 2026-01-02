@@ -1,0 +1,37 @@
+# Rust source files
+src/
+target/
+Cargo.toml
+Cargo.lock
+
+# Documentation (keep README)
+docs/
+*.md
+!README.md
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+*.tar.gz
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+tests/
+*.test.js
+
+# CI/CD
+.github/
+

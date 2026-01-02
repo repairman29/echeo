@@ -1,0 +1,299 @@
+{
+  "armory": [
+    {
+      "confidence": 0.98,
+      "name": "Deployer",
+      "path": "./src/deployer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "DeployConfig",
+      "path": "./src/deployer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Deployer",
+      "path": "./src/deployer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GitHubIntegrator",
+      "path": "./src/github.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Repository",
+      "path": "./src/github.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GitHubRepo",
+      "path": "./src/github.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GitHubTreeItem",
+      "path": "./src/github.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GitHubTree",
+      "path": "./src/github.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GitHubBlob",
+      "path": "./src/github.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GitHubIntegrator",
+      "path": "./src/github.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Summarizer",
+      "path": "./src/summarizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GenerateRequest",
+      "path": "./src/summarizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GenerateOptions",
+      "path": "./src/summarizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "GenerateResponse",
+      "path": "./src/summarizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Summarizer",
+      "path": "./src/summarizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Matchmaker",
+      "path": "./src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Need",
+      "path": "./src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Match",
+      "path": "./src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Matchmaker",
+      "path": "./src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Vectorizer",
+      "path": "./src/vectorizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "EmbeddingRequest",
+      "path": "./src/vectorizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "EmbeddingResponse",
+      "path": "./src/vectorizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "EmbeddedCapability",
+      "path": "./src/vectorizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Vectorizer",
+      "path": "./src/vectorizer.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Matchmaker",
+      "path": "./deployments/need-2-need/src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Need",
+      "path": "./deployments/need-2-need/src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Match",
+      "path": "./deployments/need-2-need/src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Matchmaker",
+      "path": "./deployments/need-2-need/src/matchmaker.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Shredder",
+      "path": "./src/shredder.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Capability",
+      "path": "./src/shredder.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Shredder",
+      "path": "./src/shredder.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "name": "Args",
+      "path": "./src/main.rs",
+      "tags": [
+        "rs",
+        "class"
+      ]
+    }
+  ],
+  "ship_velocity_score": 94,
+  "stack_dominance": {
+    "python": 0.03,
+    "rust": 0.12,
+    "typescript": 0.85
+  },
+  "user_handle": "local_ghost"
+}
