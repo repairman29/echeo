@@ -62,7 +62,7 @@ impl BountyScraper {
         let response = client
             .get(&url)
             .header("Authorization", format!("Bearer {}", token))
-            .header("User-Agent", "payload-cli")
+            .header("User-Agent", "echeo-cli")
             .header("Accept", "application/vnd.github.v3+json")
             .send()
             .await?;
@@ -148,7 +148,7 @@ impl BountyScraper {
 
         let response = client
             .get(url)
-            .header("User-Agent", "payload-cli")
+            .header("User-Agent", "echeo-cli")
             .send()
             .await?;
 

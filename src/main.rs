@@ -465,7 +465,7 @@ async fn main() -> Result<()> {
         if args.deploy.is_some() {
             // Save matches to temp file for deploy to read
             let matches_json = serde_json::to_string(&matches)?;
-            let temp_file = std::env::temp_dir().join("payload_matches.json");
+            let temp_file = std::env::temp_dir().join("echeo_matches.json");
             fs::write(&temp_file, matches_json)?;
         }
     }
@@ -511,7 +511,7 @@ async fn main() -> Result<()> {
                 println!("  {} Next steps:", "[+]".green());
                 println!("    cd {}", repo_path.display());
                 println!("    git add .");
-                println!("    git commit -m 'Initial deployment from PAYLOAD'");
+                println!("    git commit -m 'Initial deployment from Echeo'");
                 println!("    # Polish the code, then ship!");
             }
             Err(e) => {
@@ -720,8 +720,8 @@ async fn main() -> Result<()> {
                 }).collect::<Vec<_>>()
             });
 
-            let loadout_path = Path::new(".payload").join("loadout.json");
-            fs::create_dir_all(".payload")?;
+            let loadout_path = Path::new(".echeo").join("loadout.json");
+            fs::create_dir_all(".echeo")?;
             fs::write(&loadout_path, serde_json::to_string_pretty(&loadout)?)?;
             
             println!("{}", "---------------------------------".dimmed());

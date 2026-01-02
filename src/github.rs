@@ -83,7 +83,7 @@ impl GitHubIntegrator {
             .client
             .get(&url)
             .header("Authorization", format!("Bearer {}", self.token))
-            .header("User-Agent", "payload-cli")
+            .header("User-Agent", "echeo-cli")
             .header("Accept", "application/vnd.github.v3+json")
             .send()
             .await?
@@ -122,7 +122,7 @@ impl GitHubIntegrator {
             .client
             .get(&repo_url)
             .header("Authorization", format!("Bearer {}", self.token))
-            .header("User-Agent", "payload-cli")
+            .header("User-Agent", "echeo-cli")
             .header("Accept", "application/vnd.github.v3+json")
             .send()
             .await?
@@ -144,7 +144,7 @@ impl GitHubIntegrator {
             .client
             .get(&tree_url)
             .header("Authorization", format!("Bearer {}", self.token))
-            .header("User-Agent", "payload-cli")
+            .header("User-Agent", "echeo-cli")
             .header("Accept", "application/vnd.github.v3+json")
             .send()
             .await?
@@ -324,7 +324,7 @@ impl GitHubIntegrator {
             .client
             .get(&blob_url)
             .header("Authorization", format!("Bearer {}", self.token))
-            .header("User-Agent", "payload-cli")
+            .header("User-Agent", "echeo-cli")
             .header("Accept", "application/vnd.github.v3+json")
             .send()
             .await?

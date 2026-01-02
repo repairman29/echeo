@@ -22,7 +22,7 @@ struct CacheEntry {
 
 impl EmbeddingCache {
     pub fn new(cache_dir: &Path) -> Result<Self> {
-        let cache_path = cache_dir.join(".payload").join("embeddings_cache.json");
+        let cache_path = cache_dir.join(".echeo").join("embeddings_cache.json");
         let cache = if cache_path.exists() {
             let content = fs::read_to_string(&cache_path)?;
             let entries: Vec<CacheEntry> = serde_json::from_str(&content).unwrap_or_default();

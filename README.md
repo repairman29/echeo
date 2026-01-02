@@ -1,11 +1,10 @@
-# PAYLOAD CLI - The Ingest Agent
+# ECHEO - The Resonant Engine
 
-**Project Codename:** THE ENGINE  
-**Mission:** Death to "Hiring." Long live "Shipping."
+**Mission:** Find where your code resonates with market needs.
 
 ## 🎯 What It Does
 
-PAYLOAD is a weapon that connects your existing code to live money. It:
+Echeo connects your existing code to live bounties. It:
 
 1. **Scans** your codebase for capabilities (functions, classes, components)
 2. **Extracts** code snippets and generates vector embeddings
@@ -123,7 +122,7 @@ git push origin main
   Ship Velocity: 87% Match
   Your Capability: processPayment
   Why: High semantic similarity (85%), Language match: typescript
-  [DEPLOY] Run: payload --deploy 1
+  [DEPLOY] Run: echeo --deploy 1
 ```
 
 ## 🔧 CLI Options
@@ -155,7 +154,7 @@ git push origin main
 ## 📁 Project Structure
 
 ```
-payload-cli/
+echeo/
 ├── src/
 │   ├── main.rs          # CLI entry point
 │   ├── shredder.rs      # AST parsing
@@ -175,8 +174,8 @@ payload-cli/
 **Phase 4: ✅ COMPLETE** - The Scraper (Bounty Collection)  
 **GitHub Integration: ✅ COMPLETE** - Cloud repository scanning
 
-**THE ENGINE is fully operational with all core features.**
+**ECHEO is fully operational with all core features.**
 
 ---
 
-**This is a weapon. Use it wisely.**
+**Find where your code resonates.**
