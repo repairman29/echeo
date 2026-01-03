@@ -36,6 +36,12 @@ deployments/
 # Logs
 *.log
 
+# Internal scripts with credentials (should not be in public repo)
+# These scripts require environment variables and are for internal use only
+scripts/scan-all-repos-enhanced.js
+scripts/scan-all-repos-fixed.js
+scripts/scan-all-repos-catalog.js
+
 # OS
 Thumbs.db
 .DS_Store
