@@ -1,5 +1,7 @@
 name: Release
 
+# This workflow only runs when you create a version tag (v*)
+# It does NOT auto-fire on pushes or pull requests
 on:
   push:
     tags:
@@ -42,17 +44,17 @@ jobs:
         run: |
           if [ "${{ matrix.archive }}" = "zip" ]; then
             cd target/${{ matrix.target }}/release
-            zip payload-cli-${{ matrix.target }}.zip payload-cli.exe
+            zip echeo-${{ matrix.target }}.zip echeo.exe
           else
             cd target/${{ matrix.target }}/release
-            tar czf payload-cli-${{ matrix.target }}.tar.gz payload-cli
+            tar czf echeo-${{ matrix.target }}.tar.gz echeo
           fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: payload-cli-${{ matrix.target }}
-          path: target/${{ matrix.target }}/release/payload-cli-${{ matrix.target }}.*
+          name: echeo-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/echeo-${{ matrix.target }}.*
 
   release:
     name: Create Release
@@ -73,4 +75,3 @@ jobs:
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
