@@ -1,6 +1,6 @@
 {
   "name": "echeo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Echeo - The Resonant Engine. Find where your code resonates with market needs.",
   "bin": {
     "echeo": "bin/echeo"
@@ -17,13 +17,21 @@
     "developer",
     "capabilities",
     "resonance",
-    "cli"
+    "cli",
+    "code-scanner",
+    "vector-search",
+    "ai-matching",
+    "codebase-analysis",
+    "developer-tools"
   ],
   "author": "Echeo Team",
-  "license": "MIT OR Apache-2.0",
+  "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/repairman29/echeo-core.git"
+    "url": "git+https://github.com/repairman29/echeo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/repairman29/echeo/issues"
   },
   "homepage": "https://echeo.io",
   "engines": {
@@ -42,6 +50,7 @@
     "bin/",
     "install.js",
     "postinstall.js",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ]
 }

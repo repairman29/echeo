@@ -1,0 +1,42 @@
+Echeo CLI - Source Available License
+
+Copyright (c) 2025 Echeo. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use
+the Software for personal or internal business purposes, subject to the
+following conditions:
+
+1. The above copyright notice and this permission notice shall be included
+   in all copies or substantial portions of the Software.
+
+2. You may NOT:
+   - Redistribute the Software or modified versions
+   - Use the Software to create competing services
+   - Remove or alter copyright notices
+   - Use the Software for any purpose that competes with Echeo
+   - Reverse engineer the Echeo platform API or services
+   - Use the Software to build competing bounty matching platforms
+
+3. Commercial use is permitted only when:
+   - Using the Software to connect to the Echeo platform (echeo.io)
+   - Complying with Echeo Terms of Service (https://echeo.io/terms)
+   - Not creating competing bounty matching or developer marketplace services
+
+4. Source Code Access:
+   - Source code may be made available for review and audit
+   - You may modify the Software for personal use
+   - Modified versions may NOT be redistributed
+   - Contributions may be accepted subject to Contributor License Agreement
+
+5. Platform Integration:
+   - This Software is designed to work with the Echeo platform
+   - Use of this Software requires an Echeo account
+   - API access is subject to Echeo Terms of Service
+   - Platform features (payments, subscriptions, trust scores) are proprietary
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+For full terms, see: https://echeo.io/terms

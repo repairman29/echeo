@@ -31,11 +31,27 @@ cargo install echeo
 
 ### From Source
 ```bash
-git clone https://github.com/repairman29/echeo-core.git
-cd echeo-core
+git clone https://github.com/repairman29/echeo.git
+cd echeo
 cargo build --release
 ./target/release/echeo --version
 ```
+
+## 📜 License
+
+Echeo CLI is licensed under a **Source-Available License**. This means:
+
+- ✅ **You can:** View source code, use with Echeo platform, modify for personal use
+- ❌ **You cannot:** Redistribute, create competing services, use outside Echeo ecosystem
+
+For full license terms, see [LICENSE](./LICENSE) file.
+
+**Why Source-Available?**
+- Transparency: You can audit the code for security
+- Trust: Open source principles with business protection
+- IP Protection: Prevents competitors from forking and competing
+
+The Echeo platform (payments, subscriptions, trust scores) remains fully proprietary.
 
 ## Quick Start
 

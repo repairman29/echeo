@@ -1,51 +1,34 @@
 # Changelog
 
-All notable changes to THE ENGINE will be documented in this file.
+All notable changes to the Echeo CLI package will be documented in this file.
 
-## [0.1.0] - 2025-01-01
+## [0.1.1] - 2026-01-03
+
+### Changed
+- **License:** Updated from MIT OR Apache-2.0 to Source-Available License
+- **Repository:** Fixed repository URL from `yourusername/echeo` to `repairman29/echeo`
+- **Metadata:** Added bugs URL (`repairman29/echeo/issues`)
+- **Keywords:** Enhanced from 8 to 13 keywords for better discoverability
+- **Package:** Added LICENSE file to published package
 
 ### Added
-- **Phase 1: The Armory** - Code scanning, AST parsing, embeddings, summarization
-- **Phase 2: The Matchmaking Core** - Vector similarity matching, Ship Velocity Score
-- **Phase 3: The Battlefield** - Deployment flow, LLM wiring, loadout generation
-- **Phase 4: The Scraper** - GitHub Issues and Gitcoin bounty scraping
-- **GitHub Integration** - Repository scanning and OAuth support
-- **15 Language Support** - TypeScript, Rust, Python, Go, JavaScript, Java, C++, C, Swift, Kotlin, PHP, Scala, Dart, Solidity, Ruby
-- **AST Parsing** - Full support for TypeScript, Rust, Python, Go
-- **CLI Interface** - Complete command-line interface with 20+ options
-- **Loadout Generation** - JSON export of all capabilities
-- **Auto-Embedding** - Automatic embedding generation for scraped bounties
+- LICENSE file with source-available terms
+- IP protection against redistribution and competing services
+- Documentation updates (README, internal docs)
 
-### Features
-- Fast parallel scanning with `.gitignore` support
-- 768-dimension vector embeddings via Ollama
-- 5-word capability descriptions via Llama3
-- Cosine similarity matching
-- Ship Velocity Score calculation
-- Tinder-style match feed
-- Automatic deployment with LLM code wiring
-- Bounty amount extraction from text
-- Score filtering and composite matching
+### Fixed
+- Repository URL now points to correct GitHub repository
+- Missing bugs URL added
+- Package metadata now accurate on npm
 
-### Performance
-- Parallel file scanning with Rayon
-- Async operations with Tokio
-- Fast vector similarity calculations
-- Optimized release builds
+## [0.1.0] - 2026-01-02
 
----
-
-## [Unreleased]
-
-### Planned
-- More AST parsers (Java, C++, Swift)
-- More bounty sources (Upwork, Twitter, Discord)
-- Embedding cache implementation
-- Web UI (when requested)
-- Batch operations
-- Scheduled scraping
-
----
-
-**THE ENGINE v0.1.0 - Ready to ship!** 🚀
+### Added
+- Initial release
+- CLI tool for code scanning and capability extraction
+- Vector embedding generation
+- Bounty matching algorithm
+- Deployment automation
+- GitHub integration
+- Bounty scraping (GitHub Issues, Gitcoin)
 
