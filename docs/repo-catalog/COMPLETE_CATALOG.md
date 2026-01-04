@@ -34,7 +34,7 @@
 **Files with Capabilities:**
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./src/backend/backend/smugglers-backend/src/app/api/ai_response_caching_system/route.test.ts
 - ./first-mate-app/src/types/character.ts
 - ./first-mate-app/src/app/layout.tsx
@@ -57,7 +57,7 @@
 - **Updated:** 12/30/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -82,7 +82,7 @@
 - **Updated:** 7/12/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -107,7 +107,7 @@
 - **Updated:** 6/8/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./BEAST-MODE-PRODUCT/website/app/api/mlops/fine-tuning/route.ts
@@ -132,7 +132,7 @@
 - **Updated:** 12/30/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -157,7 +157,7 @@
 - **Updated:** 7/29/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -182,7 +182,7 @@
 - **Updated:** 12/30/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./.cursor/extensions/smugglers-extension/src/smugglersExtension.ts
@@ -207,7 +207,7 @@
 - **Updated:** 4/17/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./BEAST-MODE-PRODUCT/website/app/api/mlops/feedback-loop/route.ts
 - ./BEAST-MODE-PRODUCT/cursor-extension/src/extension.ts
 - ./BEAST-MODE-PRODUCT/website/app/api/mlops/model-registry/route.ts
@@ -232,7 +232,7 @@
 - **Updated:** 8/26/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./BEAST-MODE-PRODUCT/cursor-extension/src/extension.ts
 - ./BEAST-MODE-PRODUCT/website/middleware.ts
 - ./first-mate-app/next-env.d.ts
@@ -257,7 +257,7 @@
 - **Updated:** 11/29/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -266,7 +266,7 @@
 - ./BEAST-MODE-PRODUCT/website/middleware.ts
 - ./BEAST-MODE-PRODUCT/website/app/robots.ts
 - ./BEAST-MODE-PRODUCT/website/app/favicon.ico/route.ts
-- ./echeo-landing/app/dashboard/page.tsx
+- ./echeo-web/app/dashboard/page.tsx
 - ... and 267 more
 
 ---
@@ -282,7 +282,7 @@
 - **Updated:** 12/30/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -307,7 +307,7 @@
 - **Updated:** 7/19/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./BEAST-MODE-PRODUCT/cursor-extension/src/extension.ts
 - ./BEAST-MODE-PRODUCT/website/middleware.ts
 - ./BEAST-MODE-PRODUCT/website/app/robots.ts
@@ -332,7 +332,7 @@
 - **Updated:** 7/19/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -357,12 +357,12 @@
 - **Updated:** 12/30/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
 - ./first-mate-app/src/app/layout.tsx
-- ./echeo-landing/app/dashboard/page.tsx
+- ./echeo-web/app/dashboard/page.tsx
 - ./BEAST-MODE-PRODUCT/cursor-extension/src/extension.ts
 - ./BEAST-MODE-PRODUCT/website/middleware.ts
 - ./BEAST-MODE-PRODUCT/website/app/robots.ts
@@ -384,7 +384,7 @@
 **Files with Capabilities:**
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/src/types/character.ts
 - ./first-mate-app/src/app/layout.tsx
 - ./first-mate-app/src/app/page.tsx
@@ -407,7 +407,7 @@
 - **Updated:** 7/12/2025
 
 **Files with Capabilities:**
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./first-mate-app/next-env.d.ts
 - ./first-mate-app/next.config.ts
 - ./first-mate-app/src/types/character.ts
@@ -434,7 +434,7 @@
 **Files with Capabilities:**
 - ./BEAST-MODE-PRODUCT/website/app/api/mlops/feedback-loop/route.ts
 - ./BEAST-MODE-PRODUCT/website/app/api/mlops/model-registry/route.ts
-- ./echeo-landing/app/auth/callback/route.ts
+- ./echeo-web/app/auth/callback/route.ts
 - ./BEAST-MODE-PRODUCT/website/app/api/mlops/analytics/route.ts
 - ./BEAST-MODE-PRODUCT/examples/vibe-check/app/layout.tsx
 - ./BEAST-MODE-PRODUCT/website/app/api/marketplace/plugins/route.ts

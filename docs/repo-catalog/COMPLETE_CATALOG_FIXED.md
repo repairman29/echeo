@@ -297,7 +297,7 @@
 
 ---
 
-### 14. repairman29/echeo-core 🔒
+### 14. repairman29/echeo-internal 🔒
 
 - **Capabilities:** 38
 - **Signals:** 9
@@ -309,7 +309,7 @@
 
 ---
 
-### 15. repairman29/echeo-landing 🔒
+### 15. repairman29/echeo-web 🔒
 
 - **Capabilities:** 27
 - **Signals:** 14
@@ -320,16 +320,16 @@
 - **Updated:** 1/1/2026
 
 **Sample Files with Capabilities:**
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/app/api/auth/github/route.ts
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/lib/auth-context.tsx
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/lib/supabase.ts
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/app/auth/callback/route.ts
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/app/layout.tsx
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/app/api/loadout/route.ts
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/app/api/capabilities/route.ts
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/lib/auth.ts
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/app/dashboard/page.tsx
-- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-landing/lib/env.ts
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/app/api/auth/github/route.ts
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/lib/auth-context.tsx
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/lib/supabase.ts
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/app/auth/callback/route.ts
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/app/layout.tsx
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/app/api/loadout/route.ts
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/app/api/capabilities/route.ts
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/lib/auth.ts
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/app/dashboard/page.tsx
+- /var/folders/7s/j23ghzjx04d_s5mf2wd53yrr0000gn/T/echeo-scan-1767325961458/echeo-web/lib/env.ts
 - ... and 4 more
 
 ---
@@ -568,8 +568,8 @@
 - **🔒  repairman29/smugglers**: 101 capabilities, 32 signals, 3963 files
 - **🔒  repairman29/oracle**: 92 capabilities, 6 signals, 98 files
 - **🌐  repairman29/mixdown**: 76 capabilities, 9 signals, 67 files
-- **🔒  repairman29/echeo-core**: 38 capabilities, 9 signals, 92 files
-- **🔒  repairman29/echeo-landing**: 27 capabilities, 14 signals, 94 files
+- **🔒  repairman29/echeo-internal**: 38 capabilities, 9 signals, 92 files
+- **🔒  repairman29/echeo-web**: 27 capabilities, 14 signals, 94 files
 - **🔒  repairman29/dice**: 21 capabilities, 8 signals, 46 files
 - **🌐  repairman29/coloringbook**: 9 capabilities, 3 signals, 44 files
 - **🌐  repairman29/biomeweavers**: 6 capabilities, 8 signals, 52 files

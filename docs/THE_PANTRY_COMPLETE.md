@@ -147,8 +147,8 @@
 **Total:** 444 capabilities (2% of pantry!)
 
 ### **Tier 4: Small Ingredients (1-99 capabilities)**
-- **echeo-core** - 38
-- **echeo-landing** - 27
+- **echeo-internal** - 38
+- **echeo-web** - 27
 - **mixdown** - 76
 - **dice** - 21
 - **workbench** - 4
@@ -218,8 +218,8 @@
 - ims: 251
 - smugglers: 101
 - oracle: 92
-- echeo-core: 38
-- echeo-landing: 27
+- echeo-internal: 38
+- echeo-web: 27
 - mixdown: 76
 - dice: 21
 - workbench: 4
