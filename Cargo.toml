@@ -54,3 +54,6 @@ base64 = "0.21"
 chrono = "0.4"
 regex = "1.10"
 
+# Git Integration (for blame/authorship tracking)
+git2 = "0.18"
+

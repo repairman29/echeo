@@ -2,10 +2,12 @@ use anyhow::Result;
 use std::fs;
 use std::path::Path;
 use tree_sitter::Parser;
+use crate::authorship::{AuthorshipAnalyzer, AuthorshipInfo};
 
 /// THE SHREDDER: Extracts capabilities from code using AST parsing
 pub struct Shredder {
     parser: Parser,
+    authorship_analyzer: Option<AuthorshipAnalyzer>,
 }
 
 #[derive(Debug, Clone)]
@@ -14,6 +16,7 @@ pub struct Capability {
     pub kind: CapabilityKind,
     pub line: usize,
     pub code_snippet: String, // The actual code for embedding
+    pub authorship: Option<AuthorshipInfo>, // Git blame authorship info
 }
 
 #[derive(Debug, Clone)]
@@ -27,7 +30,24 @@ pub enum CapabilityKind {
 impl Shredder {
     pub fn new() -> Result<Self> {
         let parser = Parser::new();
-        Ok(Self { parser })
+        Ok(Self { 
+            parser,
+            authorship_analyzer: None,
+        })
+    }
+
+    /// Create a new Shredder with authorship tracking enabled
+    pub fn with_authorship(
+        repo_path: &Path,
+        user_email: Option<String>,
+        user_name: Option<String>,
+    ) -> Result<Self> {
+        let parser = Parser::new();
+        let authorship_analyzer = AuthorshipAnalyzer::new(repo_path, user_email, user_name).ok();
+        Ok(Self {
+            parser,
+            authorship_analyzer,
+        })
     }
 
     /// Extract code snippet from a node (limited to 500 chars for embedding)
@@ -73,16 +93,16 @@ impl Shredder {
         // Extract based on language
         match ext {
             "ts" | "tsx" | "js" | "jsx" => {
-                capabilities.extend(self.extract_typescript_capabilities(&root_node, &source_code)?);
+                capabilities.extend(self.extract_typescript_capabilities(&root_node, &source_code, path)?);
             }
             "rs" => {
-                capabilities.extend(self.extract_rust_capabilities(&root_node, &source_code)?);
+                capabilities.extend(self.extract_rust_capabilities(&root_node, &source_code, path)?);
             }
             "py" => {
-                capabilities.extend(self.extract_python_capabilities(&root_node, &source_code)?);
+                capabilities.extend(self.extract_python_capabilities(&root_node, &source_code, path)?);
             }
             "go" => {
-                capabilities.extend(self.extract_go_capabilities(&root_node, &source_code)?);
+                capabilities.extend(self.extract_go_capabilities(&root_node, &source_code, path)?);
             }
             _ => {}
         }
@@ -128,6 +148,9 @@ impl Shredder {
                             let is_component = name.chars().next().map(|c| c.is_uppercase()).unwrap_or(false);
                             
                             let code_snippet = Self::extract_code_snippet(node, source);
+                            let line = node.start_position().row + 1;
+                            let authorship = self.get_authorship(path, line, line);
+                            
                             capabilities.push(Capability {
                                 name: name.clone(),
                                 kind: if is_component {
@@ -135,8 +158,9 @@ impl Shredder {
                                 } else {
                                     CapabilityKind::Function
                                 },
-                                line: node.start_position().row + 1,
+                                line,
                                 code_snippet,
+                                authorship,
                             });
                         }
                         break;
@@ -179,6 +203,9 @@ impl Shredder {
                     if let Some(n) = name {
                         let is_component = n.chars().next().map(|c| c.is_uppercase()).unwrap_or(false);
                         let code_snippet = Self::extract_code_snippet(node, source);
+                        let line = node.start_position().row + 1;
+                        let authorship = self.get_authorship(path, line, line);
+                        
                         capabilities.push(Capability {
                             name: n,
                             kind: if is_component {
@@ -186,8 +213,9 @@ impl Shredder {
                             } else {
                                 CapabilityKind::Function
                             },
-                            line: node.start_position().row + 1,
+                            line,
                             code_snippet,
+                            authorship,
                         });
                     }
                 }
@@ -201,11 +229,15 @@ impl Shredder {
                         if !name.is_empty() && (name == "get" || name == "post" || name == "put" || name == "delete") {
                             // This might be an API route
                             let code_snippet = Self::extract_code_snippet(node, source);
+                            let line = node.start_position().row + 1;
+                            let authorship = self.get_authorship(path, line, line);
+                            
                             capabilities.push(Capability {
                                 name,
                                 kind: CapabilityKind::ApiRoute,
-                                line: node.start_position().row + 1,
+                                line,
                                 code_snippet,
+                                authorship,
                             });
                         }
                         break;
@@ -218,7 +250,7 @@ impl Shredder {
         // Recurse into children
         for i in 0..node.child_count() {
             if let Some(child) = node.child(i) {
-                self.traverse_typescript_node(&child, source, capabilities, current_is_exported)?;
+                self.traverse_typescript_node(&child, source, capabilities, current_is_exported, path)?;
             }
         }
 
@@ -277,11 +309,15 @@ impl Shredder {
 
                 if found_pub && name.is_some() {
                     let code_snippet = Self::extract_code_snippet(node, source);
+                    let line = node.start_position().row + 1;
+                    let authorship = self.get_authorship(path, line, line);
+                    
                     capabilities.push(Capability {
                         name: name.unwrap(),
                         kind: CapabilityKind::Function,
-                        line: node.start_position().row + 1,
+                        line,
                         code_snippet,
+                        authorship,
                     });
                 }
             }
@@ -308,7 +344,7 @@ impl Shredder {
         // Recurse into children
         for i in 0..node.child_count() {
             if let Some(child) = node.child(i) {
-                self.traverse_rust_node(&child, source, capabilities, current_is_pub)?;
+                self.traverse_rust_node(&child, source, capabilities, current_is_pub, path)?;
             }
         }
 
@@ -342,11 +378,15 @@ impl Shredder {
                     if child.kind() == "identifier" {
                         let name = child.utf8_text(source.as_bytes())?.to_string();
                         let code_snippet = Self::extract_code_snippet(node, source);
+                        let line = node.start_position().row + 1;
+                        let authorship = self.get_authorship(path, line, line);
+                        
                         capabilities.push(Capability {
                             name,
                             kind: CapabilityKind::Function,
-                            line: node.start_position().row + 1,
+                            line,
                             code_snippet,
+                            authorship,
                         });
                         break;
                     }
@@ -375,7 +415,7 @@ impl Shredder {
         // Recurse
         for i in 0..node.child_count() {
             if let Some(child) = node.child(i) {
-                self.traverse_python_node(&child, source, capabilities)?;
+                self.traverse_python_node(&child, source, capabilities, path)?;
             }
         }
 
@@ -445,10 +485,19 @@ impl Shredder {
         // Recurse
         for i in 0..node.child_count() {
             if let Some(child) = node.child(i) {
-                self.traverse_go_node(&child, source, capabilities)?;
+                self.traverse_go_node(&child, source, capabilities, path)?;
             }
         }
 
         Ok(())
+    }
+
+    /// Get authorship info for a line range in a file
+    fn get_authorship(&self, path: &Path, start_line: usize, end_line: usize) -> Option<AuthorshipInfo> {
+        if let Some(ref analyzer) = self.authorship_analyzer {
+            analyzer.analyze_file(path, start_line, end_line).ok()
+        } else {
+            None
+        }
     }
 }

@@ -5,6 +5,7 @@ mod matchmaker;
 mod deployer;
 mod github;
 mod scraper;
+mod authorship;
 
 use anyhow::Result;
 use clap::Parser;
@@ -12,6 +13,7 @@ use colored::*;
 use ignore::WalkBuilder;
 use shredder::{CapabilityKind, Shredder};
 use std::path::{Path, PathBuf};
+use anyhow::Result;
 use std::fs;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
@@ -206,9 +208,15 @@ async fn main() -> Result<()> {
                         high_value_count.fetch_add(1, Ordering::Relaxed);
                         
                         // THE SHREDDER: Extract capabilities from AST
-                        let mut shredder = match Shredder::new() {
-                            Ok(s) => s,
-                            Err(_) => return,
+                        // Try to enable authorship tracking if we're in a git repo
+                        let mut shredder = if let Ok(repo_path) = find_git_repo(path) {
+                            // Try to get user email/name from git config
+                            let user_email = get_git_config("user.email").ok();
+                            let user_name = get_git_config("user.name").ok();
+                            Shredder::with_authorship(&repo_path, user_email, user_name)
+                                .unwrap_or_else(|_| Shredder::new().unwrap())
+                        } else {
+                            Shredder::new().unwrap()
                         };
 
                         match shredder.shred_file(path) {
@@ -280,6 +288,7 @@ async fn main() -> Result<()> {
                         kind_str.to_string(),
                         path.display().to_string(),
                         cap.line,
+                        cap.authorship.clone(), // Include authorship info
                     )
                 })
                 .collect();
@@ -769,7 +778,7 @@ async fn main() -> Result<()> {
 
             // Prepare capabilities for upload
             let capabilities: Vec<serde_json::Value> = caps.iter().map(|cap| {
-                serde_json::json!({
+                let mut json = serde_json::json!({
                     "name": cap.name,
                     "language": cap.language,
                     "kind": cap.kind,
@@ -777,7 +786,29 @@ async fn main() -> Result<()> {
                     "embedding": cap.embedding,
                     "summary": "", // Would need summarizer output
                     "path": cap.path
-                })
+                });
+                
+                // Add authorship fields if available
+                if let Some(ref email) = cap.author_email {
+                    json["author_email"] = serde_json::Value::String(email.clone());
+                }
+                if let Some(ref name) = cap.author_name {
+                    json["author_name"] = serde_json::Value::String(name.clone());
+                }
+                if let Some(ref sha) = cap.commit_sha {
+                    json["commit_sha"] = serde_json::Value::String(sha.clone());
+                }
+                if let Some(confidence) = cap.authorship_confidence {
+                    json["authorship_confidence"] = serde_json::Value::Number(serde_json::Number::from_f64(confidence).unwrap_or(serde_json::Number::from(1)));
+                }
+                if let Some(is_self) = cap.is_self_authored {
+                    json["is_self_authored"] = serde_json::Value::Bool(is_self);
+                }
+                if let Some(percentage) = cap.contribution_percentage {
+                    json["contribution_percentage"] = serde_json::Value::Number(serde_json::Number::from_f64(percentage).unwrap_or(serde_json::Number::from(100)));
+                }
+                
+                json
             }).collect();
 
             let payload = serde_json::json!({

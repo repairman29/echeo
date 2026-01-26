@@ -31,6 +31,19 @@ pub struct EmbeddedCapability {
     pub kind: String,
     pub path: String,
     pub line: usize,
+    // Authorship fields (optional for backward compatibility)
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub author_email: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub author_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub commit_sha: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub authorship_confidence: Option<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub is_self_authored: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub contribution_percentage: Option<f64>,
 }
 
 impl Vectorizer {
@@ -126,6 +139,12 @@ impl Vectorizer {
             kind: kind.to_string(),
             path: path.to_string(),
             line,
+            author_email: None,
+            author_name: None,
+            commit_sha: None,
+            authorship_confidence: None,
+            is_self_authored: None,
+            contribution_percentage: None,
         })
     }
 
@@ -180,6 +199,12 @@ impl Vectorizer {
                             kind,
                             path,
                             line,
+                            author_email: None,
+                            author_name: None,
+                            commit_sha: None,
+                            authorship_confidence: None,
+                            is_self_authored: None,
+                            contribution_percentage: None,
                         })
                     }
                     Err(_) => {
@@ -210,9 +235,10 @@ impl Vectorizer {
     }
 
     /// Batch embed capabilities (for efficiency)
+    /// Tuple format: (name, code, lang, kind, path, line, authorship_info)
     pub async fn embed_capabilities(
         &self,
-        capabilities: Vec<(String, String, String, String, String, usize)>,
+        capabilities: Vec<(String, String, String, String, String, usize, Option<crate::authorship::AuthorshipInfo>)>,
     ) -> Result<Vec<EmbeddedCapability>> {
         let mut embedded = Vec::new();
 
@@ -224,18 +250,35 @@ impl Vectorizer {
         
         let futures: Vec<_> = capabilities
             .into_iter()
-            .map(|(name, code, lang, kind, path, line)| {
-                Self::embed_single(
-                    client.clone(),
-                    url.clone(),
-                    model.clone(),
-                    name,
-                    code,
-                    lang,
-                    kind,
-                    path,
-                    line,
-                )
+            .map(|(name, code, lang, kind, path, line, authorship)| {
+                let client_clone = client.clone();
+                let url_clone = url.clone();
+                let model_clone = model.clone();
+                async move {
+                    let mut embedded = Self::embed_single(
+                        client_clone,
+                        url_clone,
+                        model_clone,
+                        name.clone(),
+                        code,
+                        lang,
+                        kind,
+                        path,
+                        line,
+                    ).await?;
+                    
+                    // Add authorship info if available
+                    if let Some(auth) = authorship {
+                        embedded.author_email = auth.author_email;
+                        embedded.author_name = auth.author_name;
+                        embedded.commit_sha = auth.commit_sha;
+                        embedded.authorship_confidence = Some(auth.authorship_confidence);
+                        embedded.is_self_authored = Some(auth.is_self_authored);
+                        embedded.contribution_percentage = Some(auth.contribution_percentage);
+                    }
+                    
+                    Ok::<EmbeddedCapability, anyhow::Error>(embedded)
+                }
             })
             .collect();
 
@@ -243,8 +286,9 @@ impl Vectorizer {
         for result in results {
             match result {
                 Ok(embedded_cap) => embedded.push(embedded_cap),
-                Err(_) => {
-                    // Errors are already handled in embed_single
+                Err(e) => {
+                    // Log error but continue processing
+                    eprintln!("Warning: Failed to embed capability: {}", e);
                 }
             }
         }
