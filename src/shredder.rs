@@ -115,9 +115,10 @@ impl Shredder {
         &self,
         root: &tree_sitter::Node,
         source: &str,
+        path: &Path,
     ) -> Result<Vec<Capability>> {
         let mut capabilities = Vec::new();
-        self.traverse_typescript_node(root, source, &mut capabilities, false)?;
+        self.traverse_typescript_node(root, source, &mut capabilities, false, path)?;
         Ok(capabilities)
     }
 
@@ -127,6 +128,7 @@ impl Shredder {
         source: &str,
         capabilities: &mut Vec<Capability>,
         is_exported: bool,
+        path: &Path,
     ) -> Result<()> {
         let node_type = node.kind();
         let mut current_is_exported = is_exported;
@@ -175,11 +177,14 @@ impl Shredder {
                         let name = child.utf8_text(source.as_bytes())?.to_string();
                         if !name.is_empty() {
                             let code_snippet = Self::extract_code_snippet(node, source);
+                            let line = node.start_position().row + 1;
+                            let authorship = self.get_authorship(path, line, line);
                             capabilities.push(Capability {
                                 name,
                                 kind: CapabilityKind::Class,
-                                line: node.start_position().row + 1,
+                                line,
                                 code_snippet,
+                                authorship,
                             });
                         }
                         break;
@@ -262,9 +267,10 @@ impl Shredder {
         &self,
         root: &tree_sitter::Node,
         source: &str,
+        path: &Path,
     ) -> Result<Vec<Capability>> {
         let mut capabilities = Vec::new();
-        self.traverse_rust_node(root, source, &mut capabilities, false)?;
+        self.traverse_rust_node(root, source, &mut capabilities, false, path)?;
         Ok(capabilities)
     }
 
@@ -274,6 +280,7 @@ impl Shredder {
         source: &str,
         capabilities: &mut Vec<Capability>,
         is_pub: bool,
+        path: &Path,
     ) -> Result<()> {
         let node_type = node.kind();
         let mut current_is_pub = is_pub;
@@ -328,11 +335,14 @@ impl Shredder {
                     if child.kind() == "type_identifier" {
                         let name = child.utf8_text(source.as_bytes())?.to_string();
                         let code_snippet = Self::extract_code_snippet(node, source);
+                        let line = node.start_position().row + 1;
+                        let authorship = self.get_authorship(path, line, line);
                         capabilities.push(Capability {
                             name,
                             kind: CapabilityKind::Class,
-                            line: node.start_position().row + 1,
+                            line,
                             code_snippet,
+                            authorship,
                         });
                         break;
                     }
@@ -356,9 +366,10 @@ impl Shredder {
         &self,
         root: &tree_sitter::Node,
         source: &str,
+        path: &Path,
     ) -> Result<Vec<Capability>> {
         let mut capabilities = Vec::new();
-        self.traverse_python_node(root, source, &mut capabilities)?;
+        self.traverse_python_node(root, source, &mut capabilities, path)?;
         Ok(capabilities)
     }
 
@@ -367,6 +378,7 @@ impl Shredder {
         node: &tree_sitter::Node,
         source: &str,
         capabilities: &mut Vec<Capability>,
+        path: &Path,
     ) -> Result<()> {
         let node_type = node.kind();
 
@@ -399,11 +411,14 @@ impl Shredder {
                     if child.kind() == "identifier" {
                         let name = child.utf8_text(source.as_bytes())?.to_string();
                         let code_snippet = Self::extract_code_snippet(node, source);
+                        let line = node.start_position().row + 1;
+                        let authorship = self.get_authorship(path, line, line);
                         capabilities.push(Capability {
                             name,
                             kind: CapabilityKind::Class,
-                            line: node.start_position().row + 1,
+                            line,
                             code_snippet,
+                            authorship,
                         });
                         break;
                     }
@@ -427,9 +442,10 @@ impl Shredder {
         &self,
         root: &tree_sitter::Node,
         source: &str,
+        path: &Path,
     ) -> Result<Vec<Capability>> {
         let mut capabilities = Vec::new();
-        self.traverse_go_node(root, source, &mut capabilities)?;
+        self.traverse_go_node(root, source, &mut capabilities, path)?;
         Ok(capabilities)
     }
 
@@ -438,6 +454,7 @@ impl Shredder {
         node: &tree_sitter::Node,
         source: &str,
         capabilities: &mut Vec<Capability>,
+        path: &Path,
     ) -> Result<()> {
         let node_type = node.kind();
 
@@ -451,11 +468,14 @@ impl Shredder {
                         // Only export if it starts with uppercase (Go exports)
                         if name.chars().next().map(|c| c.is_uppercase()).unwrap_or(false) {
                             let code_snippet = Self::extract_code_snippet(node, source);
+                            let line = node.start_position().row + 1;
+                            let authorship = self.get_authorship(path, line, line);
                             capabilities.push(Capability {
                                 name,
                                 kind: CapabilityKind::Function,
-                                line: node.start_position().row + 1,
+                                line,
                                 code_snippet,
+                                authorship,
                             });
                         }
                         break;
@@ -469,11 +489,14 @@ impl Shredder {
                     if child.kind() == "type_identifier" {
                         let name = child.utf8_text(source.as_bytes())?.to_string();
                         let code_snippet = Self::extract_code_snippet(node, source);
+                        let line = node.start_position().row + 1;
+                        let authorship = self.get_authorship(path, line, line);
                         capabilities.push(Capability {
                             name,
                             kind: CapabilityKind::Class,
-                            line: node.start_position().row + 1,
+                            line,
                             code_snippet,
+                            authorship,
                         });
                         break;
                     }

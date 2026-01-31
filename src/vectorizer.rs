@@ -126,6 +126,12 @@ impl Vectorizer {
                 kind: kind.to_string(),
                 path: path.to_string(),
                 line,
+                author_email: None,
+                author_name: None,
+                commit_sha: None,
+                authorship_confidence: None,
+                is_self_authored: None,
+                contribution_percentage: None,
             });
         }
 
@@ -216,6 +222,12 @@ impl Vectorizer {
                             kind,
                             path,
                             line,
+                            author_email: None,
+                            author_name: None,
+                            commit_sha: None,
+                            authorship_confidence: None,
+                            is_self_authored: None,
+                            contribution_percentage: None,
                         })
                     }
                 }
@@ -229,6 +241,12 @@ impl Vectorizer {
                     kind,
                     path,
                     line,
+                    author_email: None,
+                    author_name: None,
+                    commit_sha: None,
+                    authorship_confidence: None,
+                    is_self_authored: None,
+                    contribution_percentage: None,
                 })
             }
         }

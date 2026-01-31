@@ -7,11 +7,12 @@ mod github;
 mod scraper;
 mod authorship;
 
-use anyhow::Result;
 use clap::Parser;
 use colored::*;
+use git2::{Config, Repository};
 use ignore::WalkBuilder;
 use shredder::{CapabilityKind, Shredder};
+use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use anyhow::Result;
 use std::fs;
@@ -886,6 +887,19 @@ fn print_detection(path: &Path, ext: &str) {
         parent.dimmed(),
         filename.white()
     );
+}
+
+fn find_git_repo(path: &Path) -> Result<PathBuf> {
+    let repo = Repository::discover(path)?;
+    let workdir = repo
+        .workdir()
+        .ok_or_else(|| anyhow::anyhow!("Git repository has no workdir"))?;
+    Ok(workdir.to_path_buf())
+}
+
+fn get_git_config(key: &str) -> Result<String> {
+    let config = Config::open_default()?;
+    Ok(config.get_string(key)?)
 }
 
 

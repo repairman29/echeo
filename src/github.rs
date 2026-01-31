@@ -252,6 +252,7 @@ impl GitHubIntegrator {
                         kind_str.to_string(),
                         format!("github.com/{}/{}", owner, repo),
                         cap.line,
+                        cap.authorship.clone(),
                     )
                 })
                 .collect();
@@ -271,6 +272,20 @@ impl GitHubIntegrator {
                     Ok(all_capabilities
                         .into_iter()
                         .map(|(_, _, cap)| {
+                            let (author_email, author_name, commit_sha, authorship_confidence, is_self_authored, contribution_percentage) =
+                                if let Some(auth) = &cap.authorship {
+                                    (
+                                        auth.author_email.clone(),
+                                        auth.author_name.clone(),
+                                        auth.commit_sha.clone(),
+                                        Some(auth.authorship_confidence),
+                                        Some(auth.is_self_authored),
+                                        Some(auth.contribution_percentage),
+                                    )
+                                } else {
+                                    (None, None, None, None, None, None)
+                                };
+
                             EmbeddedCapability {
                                 name: cap.name,
                                 code_snippet: cap.code_snippet,
@@ -284,6 +299,12 @@ impl GitHubIntegrator {
                                 },
                                 path: format!("github.com/{}/{}", owner, repo),
                                 line: cap.line,
+                                author_email,
+                                author_name,
+                                commit_sha,
+                                authorship_confidence,
+                                is_self_authored,
+                                contribution_percentage,
                             }
                         })
                         .collect())
@@ -294,6 +315,20 @@ impl GitHubIntegrator {
             Ok(all_capabilities
                 .into_iter()
                 .map(|(_, _, cap)| {
+                    let (author_email, author_name, commit_sha, authorship_confidence, is_self_authored, contribution_percentage) =
+                        if let Some(auth) = &cap.authorship {
+                            (
+                                auth.author_email.clone(),
+                                auth.author_name.clone(),
+                                auth.commit_sha.clone(),
+                                Some(auth.authorship_confidence),
+                                Some(auth.is_self_authored),
+                                Some(auth.contribution_percentage),
+                            )
+                        } else {
+                            (None, None, None, None, None, None)
+                        };
+
                     EmbeddedCapability {
                         name: cap.name,
                         code_snippet: cap.code_snippet,
@@ -307,6 +342,12 @@ impl GitHubIntegrator {
                         },
                         path: format!("github.com/{}/{}", owner, repo),
                         line: cap.line,
+                        author_email,
+                        author_name,
+                        commit_sha,
+                        authorship_confidence,
+                        is_self_authored,
+                        contribution_percentage,
                     }
                 })
                 .collect())

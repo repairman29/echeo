@@ -48,8 +48,8 @@ impl AuthorshipAnalyzer {
 
         // Run git blame
         let mut opts = BlameOptions::new();
-        opts.min_line(start_line as u32 + 1); // git blame is 1-indexed
-        opts.max_line(end_line as u32 + 1);
+        opts.min_line(start_line + 1); // git blame is 1-indexed
+        opts.max_line(end_line + 1);
         
         let blame = self.repo.blame_file(relative_path, Some(&mut opts))?;
 
@@ -77,7 +77,7 @@ impl AuthorshipAnalyzer {
 
         // Collect authorship info for each line
         for i in start_line..=end_line {
-            if let Some(hunk) = blame.get_line(i as u32 + 1) {
+            if let Some(hunk) = blame.get_line(i + 1) {
                 let commit = hunk.final_commit_id();
                 let commit_obj = self.repo.find_commit(commit)?;
                 
@@ -102,8 +102,8 @@ impl AuthorshipAnalyzer {
         }
 
         // Determine primary author (most common)
-        let primary_email = self.most_common(&author_emails);
-        let primary_name = self.most_common(&author_names);
+        let primary_email = AuthorshipAnalyzer::most_common(&author_emails);
+        let primary_name = AuthorshipAnalyzer::most_common(&author_names);
         let primary_commit = commit_shas.first().cloned();
 
         // Calculate contribution percentage
@@ -117,8 +117,8 @@ impl AuthorshipAnalyzer {
         let is_self_authored = contribution_percentage >= 80.0;
 
         // Calculate confidence based on consistency
-        let email_consistency = self.calculate_consistency(&author_emails);
-        let name_consistency = self.calculate_consistency(&author_names);
+        let email_consistency = AuthorshipAnalyzer::calculate_consistency(&author_emails);
+        let name_consistency = AuthorshipAnalyzer::calculate_consistency(&author_names);
         let authorship_confidence = (email_consistency + name_consistency) / 2.0;
 
         Ok(AuthorshipInfo {
@@ -168,7 +168,7 @@ impl AuthorshipAnalyzer {
     }
 
     /// Calculate consistency score (0.0 to 1.0)
-    fn calculate_consistency<T: Eq>(items: &[T]) -> f64 {
+    fn calculate_consistency<T: Eq + std::hash::Hash>(items: &[T]) -> f64 {
         if items.is_empty() {
             return 0.0;
         }
