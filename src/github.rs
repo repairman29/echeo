@@ -8,6 +8,7 @@ use crate::shredder::{Shredder, CapabilityKind};
 use crate::vectorizer::{Vectorizer, EmbeddedCapability};
 
 /// THE GITHUB INTEGRATOR: Scans GitHub repositories for capabilities
+#[allow(dead_code)]
 pub struct GitHubIntegrator {
     token: String,
     client: reqwest::Client,
@@ -15,6 +16,7 @@ pub struct GitHubIntegrator {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct Repository {
     pub name: String,
     pub full_name: String,
@@ -24,6 +26,7 @@ pub struct Repository {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GitHubRepo {
     name: String,
     full_name: String,
@@ -33,6 +36,7 @@ struct GitHubRepo {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GitHubTreeItem {
     path: Option<String>,
     sha: Option<String>,
@@ -41,16 +45,19 @@ struct GitHubTreeItem {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GitHubTree {
     tree: Vec<GitHubTreeItem>,
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GitHubBlob {
     content: Option<String>,
     encoding: Option<String>,
 }
 
+#[allow(dead_code)]
 impl GitHubIntegrator {
     /// Create a new GitHub integrator with OAuth token
     pub fn new(token: String) -> Result<Self> {
@@ -238,7 +245,7 @@ impl GitHubIntegrator {
             
             let embedding_tasks: Vec<_> = all_capabilities
                 .iter()
-                .map(|(path, ext, cap)| {
+                .map(|(_path, ext, cap)| {
                     let kind_str = match cap.kind {
                         CapabilityKind::Function => "function",
                         CapabilityKind::Class => "class",

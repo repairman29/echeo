@@ -9,6 +9,7 @@ pub struct Summarizer {
 }
 
 #[derive(Debug, Clone, Serialize)]
+#[allow(dead_code)]
 struct GenerateRequest {
     model: String,
     prompt: String,
@@ -17,12 +18,14 @@ struct GenerateRequest {
 }
 
 #[derive(Debug, Clone, Serialize)]
+#[allow(dead_code)]
 struct GenerateOptions {
     temperature: f32,
     num_predict: usize,
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GenerateResponse {
     response: String,
 }
@@ -42,6 +45,7 @@ impl Summarizer {
     }
 
     /// Generate a 5-word description of a capability
+    #[allow(dead_code)]
     pub async fn summarize_capability(
         &self,
         name: &str,

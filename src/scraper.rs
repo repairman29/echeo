@@ -182,7 +182,7 @@ impl BountyScraper {
         let mut bounties = Vec::new();
         let limit = limit.unwrap_or(50);
 
-        for (idx, bounty) in data.results.iter().take(limit).enumerate() {
+        for (_idx, bounty) in data.results.iter().take(limit).enumerate() {
             let bounty_amount = if let (Some(value), Some(token)) = (bounty.value_in_token, &bounty.token_name) {
                 Some(format!("${:.2} {}", value, token))
             } else {

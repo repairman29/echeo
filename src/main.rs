@@ -23,7 +23,6 @@ use vectorizer::{Vectorizer, EmbeddedCapability};
 use summarizer::Summarizer;
 use matchmaker::{Matchmaker, Need};
 use deployer::Deployer;
-use github::GitHubIntegrator;
 use scraper::BountyScraper;
 
 /// ECHEO: The Resonant Engine

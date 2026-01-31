@@ -12,12 +12,14 @@ pub struct Vectorizer {
 }
 
 #[derive(Debug, Clone, Serialize)]
+#[allow(dead_code)]
 struct EmbeddingRequest {
     model: String,
     prompt: String,
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct EmbeddingResponse {
     embedding: Vec<f32>,
 }
@@ -88,6 +90,7 @@ impl Vectorizer {
     }
 
     /// Generate embedding for a capability
+    #[allow(dead_code)]
     pub async fn embed_capability(
         &self,
         name: &str,

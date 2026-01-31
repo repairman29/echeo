@@ -152,6 +152,7 @@ impl Matchmaker {
 
     /// Match a need against multiple capabilities (composite match)
     /// Returns the best combination of capabilities that fulfill the need
+    #[allow(dead_code)]
     pub fn match_need_composite(&self, need: &Need, max_capabilities: usize) -> Vec<Match> {
         let mut matches = self.match_need(need);
         
@@ -163,11 +164,13 @@ impl Matchmaker {
     }
 
     /// Filter matches by minimum score threshold
+    #[allow(dead_code)]
     pub fn filter_by_score(matches: Vec<Match>, min_score: f32) -> Vec<Match> {
         matches.into_iter().filter(|m| m.score >= min_score).collect()
     }
 
     /// Group matches by need (for better display)
+    #[allow(dead_code)]
     pub fn group_by_need(matches: Vec<Match>) -> std::collections::HashMap<String, Vec<Match>> {
         let mut grouped = std::collections::HashMap::new();
         for m in matches {
@@ -184,6 +187,7 @@ impl Matchmaker {
     }
 
     /// Create a sample need (for testing)
+    #[allow(dead_code)]
     pub fn create_sample_need(
         id: String,
         title: String,

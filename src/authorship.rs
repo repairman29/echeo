@@ -58,6 +58,7 @@ impl AuthorshipAnalyzer {
     }
 
     /// Analyze authorship for a specific line
+    #[allow(dead_code)]
     pub fn analyze_line(&self, file_path: &Path, line: usize) -> Result<AuthorshipInfo> {
         self.analyze_file(file_path, line, line)
     }
